@@ -2,12 +2,14 @@ var express = require('express');
 var app = express();
 var path = require('path');
 
-const INDEX = path.join(__dirname, 'public');
+const INDEX = path.join(__dirname, 'public/index.html');
 const PORT = process.env.PORT || 3000;
 const server = express()
   .use((req, res) => res.sendFile(INDEX) )
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
 var io = require('socket.io')(server);
+io.set('transports', ['xhr-polling']);
+io.set('polling duration', 10);
 const Discord = require("discord.js");
 const client = new Discord.Client();
 var confchannel;
@@ -30,7 +32,7 @@ client.on("ready", () => {
 var prefix = "*";
 var list = "help,kick,ban,ban all,kick all,purge,purge --number--,mute,unmute,delete channels,delete roles,delete channel,delete role,edit channels,edit roles,edit channel,edit role,create channel".split(",");
 
-client.login(process.env.BOT_TOKEN);
+client.login("NDE3NzU5Mjc0ODg2ODg5NDcy.DXnA6A.LvCWupBLUmXHr1hfjz19-qFXCiQ");
 
 
 // Routing
