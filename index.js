@@ -66,7 +66,6 @@ io.on('connection', function (socket) {
       msg.author.send("Here is a list!\n" + list.join("\n"));
       return;
     }
-
     if (msg.member.roles.find("name", "owner") !== null && msg.content.startsWith(prefix) || msg.author.bot && msg.content.startsWith(prefix)) {
     if (msg.content.toLowerCase() === "*purge") {
       msg.delete();
