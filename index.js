@@ -1,9 +1,13 @@
 var express = require('express');
 var app = express();
 var path = require('path');
-var server = require('http').createServer(app);
+
+const INDEX = path.join(__dirname, 'public');
+const PORT = process.env.PORT || 3000;
+const server = express()
+  .use((req, res) => res.sendFile(INDEX) )
+  .listen(PORT, () => console.log(`Listening on ${ PORT }`));
 var io = require('socket.io')(server);
-var port = process.env.PORT || 3000;
 const Discord = require("discord.js");
 const client = new Discord.Client();
 var confchannel;
@@ -28,12 +32,9 @@ var list = "help,kick,ban,ban all,kick all,purge,purge --number--,mute,unmute,de
 
 client.login(process.env.BOT_TOKEN);
 
-server.listen(port, function () {
-  console.log('Server listening at port %d', port);
-});
 
 // Routing
-app.use(express.static(path.join(__dirname, 'public')));
+
 cm = 0;
 // Chatroom
 var permitted = ["owner", "CookieBot"];
@@ -66,6 +67,7 @@ io.on('connection', function (socket) {
       msg.author.send("Here is a list!\n" + list.join("\n"));
       return;
     }
+
     if (msg.member.roles.find("name", "owner") !== null && msg.content.startsWith(prefix) || msg.author.bot && msg.content.startsWith(prefix)) {
     if (msg.content.toLowerCase() === "*purge") {
       msg.delete();

@@ -9,9 +9,9 @@
   "author": "Qyther",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^11.3.0",
-    "express": "^4.16.2",
+    "discord.js": "11.3.0",
+    "express": "4.16.2",
     "nodemon": "^1.17.1",
-    "socket.io": "^2.0.4"
+    "socket.io": "2.0.4"
   }
 }
